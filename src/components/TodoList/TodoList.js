@@ -10,6 +10,12 @@ function TodoList(props) {
           return (
             <li className="list-group-item">
               <TodoItem {...todo} key={todo.id} />
+              <button
+                className="btn btn-danger"
+                onClick={() => props.handleDelete(todo.id)}
+              >
+                Sil
+              </button>
             </li>
           );
         })}

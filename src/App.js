@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import TodoList from "./components/TodoList/TodoList";
+import TodoHeader from "./components/TodoHeader/TodoHeader";
+
 import "./App.css";
 import Form from "./components/Form/Form";
 
@@ -39,7 +41,12 @@ class App extends Component {
       );
     }
   };
-
+  deleteItem = (id) => {
+    this.setState({
+      ...this.state,
+      todos: this.state.todos.filter((item) => item.id !== id),
+    });
+  };
   onInputChange = (e) => {
     const newVal = e.target.value;
     this.setState({
@@ -50,6 +57,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <TodoHeader />
         <Form
           userInput={this.state.userInput}
           onInputChange={this.onInputChange}
@@ -57,7 +65,7 @@ class App extends Component {
         />
         {this.state.todos.length > 0 && (
           <div className="list">
-            <TodoList todos={this.state.todos} />
+            <TodoList todos={this.state.todos} handleDelete={this.deleteItem} />
           </div>
         )}
       </div>
